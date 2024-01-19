@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        h2 {
+            margin-left: 20px;
+            margin-top: 20px;
+            color: #555;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-left: 40px;
+            margin-right: 60px;
+            margin-bottom: 5px;
+            padding: 8px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .toggle-btn {
+            background-color: #5c5c5c;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .user-list {
+            display: none;
+        }
+        .reload-button {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background-color: #5c5c5c;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 8px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        /* Add more styling as needed */
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <title>Admin Dashboard</title>
+</head>
+
+<body>
+    <h1>Admin Dashboard</h1>
+    <button class="reload-button" onclick="reloadPage()">
+        <i class="fas fa-sync-alt"></i>
+    </button>
+    <% Object.keys(groupedData).forEach(userId=> { %>
+        <h2>
+            User ID: <%= userId %>
+                <button class="toggle-btn" onclick="toggleList('<%= userId %>')">Toggle List</button>
+        </h2>
+        <ul id="<%= userId %>" class="user-list">
+            <% groupedData[userId].forEach(url=> { %>
+                <li>
+                    <%= url %>
+                </li>
+                <% }); %>
+        </ul>
+        <% }); %>
+
+            <script>
+                function toggleList(userId) {
+                    var userList = document.getElementById(userId);
+                    userList.style.display = (userList.style.display === 'none' || userList.style.display === '') ? 'block' : 'none';
+                }
+                function reloadPage() {
+                    location.reload();
+                }
+            </script>
+</body>
+
+</html>
