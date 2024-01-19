@@ -34,7 +34,7 @@ function sendDataToServer(end_user_id, web_page_url) {
 }
 function handlePageRequest(req, res, next) {
     const end_user_id = req.cookies.end_user_id || uuidv4();
-    res.cookie('end_user_id', end_user_id, { maxAge: 9000, httpOnly: true });
+    res.cookie('end_user_id', end_user_id, { maxAge: 900000, httpOnly: true });
     sendDataToServer(end_user_id, req.url);
 
     res.locals.end_user_id = end_user_id;
